@@ -22,12 +22,9 @@
 *********************************************************/
 
 using SbsSW.SwiPlCs;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestSwiPl
 {
-
-    [TestClass]
     public class TestPlFrame : BasePlInit
 	{
 
@@ -47,7 +44,7 @@ namespace TestSwiPl
 	    /// <summary>
         /// Sample from the documentation PlFrame
         /// </summary>
-        [TestMethod]
+        [Test]
         public void TestPlFrameSample()
         {
             var t1 = new PlTerm("dummy");

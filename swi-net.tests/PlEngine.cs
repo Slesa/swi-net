@@ -1,10 +1,7 @@
-﻿
-using System;
-using SbsSW.SwiPlCs;
+﻿using SbsSW.SwiPlCs;
 using SbsSW.SwiPlCs.Exceptions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using System.IO;		// für List_ToList sample
+
+// für List_ToList sample
 
 namespace TestSwiPl
 {
@@ -36,7 +33,7 @@ namespace TestSwiPl
         /// <summary>
         /// Sample from the documentation PlFrame
         /// </summary>
-        [TestMethod]
+        [Test]
         #region demo_consult_pl_file_by_param
         public void Demo_consult_pl_file_by_param()
 		{
@@ -82,13 +79,13 @@ namespace TestSwiPl
 
         static private String[] empty_param = { "-q" };  // suppressing informational and banner messages
 
-	    [TestMethod]
+	    [Test]
         public void MT_demo_consult_pl_file_by_param()
 	    {
             Demo_consult_pl_file_by_param();
 	    }
 
-	    [TestMethod]
+	    [Test]
         public void MT_0()
         {
             System.Diagnostics.Trace.WriteLine("MT0:" + System.Threading.Thread.CurrentThread.ManagedThreadId);
@@ -111,7 +108,7 @@ namespace TestSwiPl
             PlEngine.PlCleanup();
         }
 
-        [TestMethod]
+        [Test]
         public void MT_0_tread()
         {
             System.Threading.Thread myThread = new System.Threading.Thread(TreadWork.CallPl);
@@ -128,7 +125,7 @@ namespace TestSwiPl
             System.Threading.Thread.Sleep(100);
         }
 
-        [TestMethod]
+        [Test]
         [TestCategory("mt")]
         public void MT_1()
         {
@@ -138,7 +135,7 @@ namespace TestSwiPl
             Assert.AreEqual(PlType.PlVariable, t.PlType, "type enum");
             PlEngine.PlCleanup();
         }
-        [TestMethod]
+        [Test]
         [TestCategory("mt")]
         public void MT_2()
         {
@@ -148,7 +145,7 @@ namespace TestSwiPl
             Assert.AreEqual(PlType.PlVariable, t.PlType, "type enum");
             PlEngine.PlCleanup();
         }
-        [TestMethod]
+        [Test]
         [TestCategory("mt")]
         public void MT_3()
         {

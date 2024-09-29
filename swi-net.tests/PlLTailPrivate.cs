@@ -20,14 +20,10 @@
 *********************************************************/
 
 
-using System;
 using SbsSW.SwiPlCs;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestSwiPl
 {
-
-    [TestClass]
     public class TestPlTailPrivate : BasePlInit
 	{
 
@@ -46,7 +42,7 @@ namespace TestSwiPl
         }
 
 
-        [TestMethod]
+        [Test]
         public void ListNext()
 		{
             PlTerm t1;
@@ -58,7 +54,7 @@ namespace TestSwiPl
 			Assert.AreEqual("y", (string)t1, "elem y");
 		}
 
-        [TestMethod]
+        [Test]
         public void ListNextLast()
         {
             PlTerm t1;

@@ -21,8 +21,6 @@
 *
 *********************************************************/
 
-using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SbsSW.SwiPlCs;
 
 namespace TestSwiPl
@@ -30,7 +28,6 @@ namespace TestSwiPl
     /// <summary>
     /// Summary description for BasePlInit
     /// </summary>
-    [TestClass]
     public class BasePlInit
     {
 
@@ -70,7 +67,7 @@ namespace TestSwiPl
         //}
 
         //Use TestInitialize to run code before running each test
-        [TestInitialize]
+        [SetUp]
         virtual public void MyTestInitialize()
         {
             InitializePlEngine();

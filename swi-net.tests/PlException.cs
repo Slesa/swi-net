@@ -21,25 +21,20 @@
 *
 *********************************************************/
 
-using System;
 using SbsSW.SwiPlCs;
 using SbsSW.SwiPlCs.Exceptions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestSwiPl
 {
-
 	/// <summary>
-	/// TestFälle zu 'SWI-cs' dem SWI prolog interface in CSharp
+	/// TestFï¿½lle zu 'SWI-cs' dem SWI prolog interface in CSharp
 	/// </summary>
-
-    [TestClass]
     public class TestPlException : BasePlInit
 	{
         /// <summary>
         /// Sample from the documentation PlFrame
         /// </summary>
-        [TestMethod]
+        [Test]
         public void KomplexPlException()
 		{
             const int size = 4;
@@ -69,7 +64,7 @@ namespace TestSwiPl
         
         #region prolog throw c# catch Samples _doc
 
-        [TestMethod]
+        [Test]
         #region prolog_exception_sample_doc
         public void prolog_exception_sample()
         {
@@ -87,7 +82,7 @@ namespace TestSwiPl
         }
         #endregion prolog_exception_sample_doc
 
-        [TestMethod]
+        [Test]
         #region prolog_type_exception_sample_doc
         public void prolog_type_exception_sample()
         {
@@ -102,7 +97,7 @@ namespace TestSwiPl
         }
         #endregion prolog_type_exception_sample_doc
 
-        [TestMethod]
+        [Test]
         #region prolog_domain_exception_sample_doc
         public void prolog_domain_exception_sample()
         {
@@ -121,7 +116,7 @@ namespace TestSwiPl
         #endregion prolog throw c# catch
 
 
-        [TestMethod]
+        [Test]
         public void t_prolog_init_exception()
         {
             PlEngine.PlCleanup();
@@ -148,7 +143,7 @@ namespace TestSwiPl
 
         #region prolog throw c# catch
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(PlException), "Unknown message: error")]
         public void t_prolog_exception()
         {
@@ -156,14 +151,14 @@ namespace TestSwiPl
             PlQuery.PlCall("test_throw");
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(PlTypeException), "is/2: Arithmetic: `error/0' is not a function")]
         public void t_prolog_exception_2()
         {
             PlQuery.PlCall("sumlist([1,error],L)");
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(PlDomainException), "open/3: Domain error: `io_mode' expected, found `nonsens'")]
         public void t_prolog_exception_3()
         {
@@ -171,7 +166,7 @@ namespace TestSwiPl
         }
 
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(PlTypeException), "`list' expected, found `[a,b,c]'")]
         public void TestException_in_a_query_2()
         {

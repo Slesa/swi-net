@@ -22,19 +22,15 @@
 *********************************************************/
 
 using SbsSW.SwiPlCs;
-using System;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestSwiPl
 {
-    [TestClass]
     public class LinqSwiPl : BasePlInit
     {
 
         private readonly string[] _abc = { "a", "b", "c" };
 
-        [TestMethod]
+        [Test]
         #region Test_multi_goal_ToList_doc
         public void Test_multi_goal_ToList()
         {
@@ -46,7 +42,7 @@ namespace TestSwiPl
         }
         #endregion Test_multi_goal_ToList_doc
 
-        [TestMethod]
+        [Test]
         #region compound_query_SolutionVariables_doc
         public void TestCompoundQuery()
         {
@@ -68,7 +64,7 @@ namespace TestSwiPl
 
         #endregion compound_query_SolutionVariables_doc
 
-        [TestMethod]
+        [Test]
         #region compound_query_ToList_doc
         public void TestCompoundQueryToList()
         {
@@ -90,7 +86,7 @@ namespace TestSwiPl
 
         #endregion compound_query_ToList_doc
 
-        [TestMethod]
+        [Test]
         #region compound_query_with_variables_doc
         public void TestCompoundQueryWithVariables()
         {
@@ -110,7 +106,7 @@ namespace TestSwiPl
 
         #endregion compound_query_with_variables_doc
 
-        [TestMethod]
+        [Test]
         #region compound_nested_query_with_variables_doc
         public void TestCompoundNestedQueryWithVariables()
         {
@@ -138,7 +134,7 @@ namespace TestSwiPl
         }
         #endregion compound_nested_query_with_variables_doc
 
-        [TestMethod]
+        [Test]
         #region compound_nested_query_with_variables_2_doc
         public void TestCompoundNestedQueryWithVariables2()
         {
@@ -171,7 +167,7 @@ namespace TestSwiPl
         }
         #endregion compound_nested_query_with_variables_2_doc
 
-        [TestMethod]
+        [Test]
         #region compound_nested_query_with_variables_3_doc
         public void TestCompoundNestedQueryWithVariables3()
         {
@@ -207,7 +203,7 @@ namespace TestSwiPl
         #endregion compound_nested_query_with_variables_3_doc
 
 
-        [TestMethod]
+        [Test]
         public void TestCompoundWithVariables2()
         {
             string[] refValuesInner = { "_gap_abc", "a_gap_bc", "ab_gap_c", "abc_gap_"};
@@ -235,7 +231,7 @@ namespace TestSwiPl
         
         
 
-        [TestMethod]
+        [Test]
         public void Query_test_arity0()
         {
             using (new PlFrame())
@@ -246,7 +242,7 @@ namespace TestSwiPl
         }
 
 
-        [TestMethod]
+        [Test]
         public void TestCompoundQuery_test()
         {
             using (new PlFrame())
@@ -258,7 +254,7 @@ namespace TestSwiPl
                 }
             }
         }
-        [TestMethod]
+        [Test]
         public void TestCompoundQuery_test_2()
         {
             using (new PlFrame())
@@ -270,7 +266,7 @@ namespace TestSwiPl
                 }
             }
         }
-        [TestMethod]
+        [Test]
         public void TestCompoundQuery_test_3()
         {
             using (new PlFrame())
@@ -285,7 +281,7 @@ namespace TestSwiPl
             }
 
         }
-        [TestMethod]
+        [Test]
         public void TestCompoundQuery_test_4()
         {
             string[] refValues = { "gloria", "melanie" };
@@ -311,7 +307,7 @@ namespace TestSwiPl
         // TODO wieder gäöngig machen
         // see http://msdn.microsoft.com/en-us/library/bb546207.aspx
         // and  http://codethings.blogspot.de/2012/10/testing-private-members-with.html
-        //[TestMethod]
+        //[Test]
         //public void TestMethod0()
         //{
         //    uintptr_t r;
@@ -324,7 +320,7 @@ namespace TestSwiPl
         //}
 
 
-        [TestMethod]
+        [Test]
         public void TestMethod_simple_x()
         {
             var results = from n in new PlQuery("member(A, [a,b,c])").ToList() select new { A = n["A"].ToString() };
@@ -334,7 +330,7 @@ namespace TestSwiPl
                 Assert.AreEqual(_abc[i++], s.A);
         }
 
-        [TestMethod]
+        [Test]
         public void TestMethod_simple()
         {
             var results = from n in new PlQuery("member(A, [a,b,c])").ToList() select n;
@@ -343,7 +339,7 @@ namespace TestSwiPl
             foreach (var t in results)
                 Assert.AreEqual(_abc[i++], t["A"].ToString());
         }
-        [TestMethod]
+        [Test]
         public void TestMethod_simple2()
         {
             var results = from n in new PlQuery("member(A, [a,b,c])").ToList() select n;
@@ -353,7 +349,7 @@ namespace TestSwiPl
                 Assert.AreEqual(_abc[i++], t["A"].ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void TestMethod_simple_inline()
         {
             var results = from n in new PlQuery("member(A, [a,b,c])").ToList() select n;
@@ -364,7 +360,7 @@ namespace TestSwiPl
         }
 
 
-        [TestMethod]
+        [Test]
         public void Test_multi_goal_2()
         {
             var results = from n in new PlQuery("L=[a,b,c], member(A, L)").ToList() select n;
@@ -379,7 +375,7 @@ namespace TestSwiPl
         }
 
 
-        [TestMethod]
+        [Test]
         public void TestMethod_2()
         {
             var q = new PlQuery("member(A, [a,b,c])");
@@ -392,7 +388,7 @@ namespace TestSwiPl
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TestMethod_simple_annonymusType_1()
         {
             var results = from n in new PlQuery("member(A, [a,b,c])").ToList() select new { upper = n["A"].ToString().ToUpper(), lower = n["A"].ToString().ToLower() };
@@ -407,7 +403,7 @@ namespace TestSwiPl
 
 
         /*
-        [TestMethod]
+        [Test]
         [Ignore]
         // onli to test some things 
         public void TestMethod_ohne_linq()

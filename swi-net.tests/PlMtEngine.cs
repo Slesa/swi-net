@@ -1,21 +1,19 @@
-
-using System;
 using SbsSW.SwiPlCs;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;		// für List_ToList sample
+
+// fï¿½r List_ToList sample
 
 namespace TestSwiPl
 {
 
 	/// <summary>
-	/// TestFälle zu 'SWI-cs' dem SWI prolog interface in CSharp
+	/// TestFï¿½lle zu 'SWI-cs' dem SWI prolog interface in CSharp
 	/// </summary>
 
     [TestClass()]
     public class t_PlMtEngine : BasePlInit
 	{
 
-        [TestMethod]
+        [Test]
         public void Test_PlMtEngine_desroy()
         {
             PlMtEngine mple1 = new PlMtEngine();
@@ -27,7 +25,7 @@ namespace TestSwiPl
             mple1.Free();
         }
 
-        //[TestMethod]
+        //[Test]
         //[Ignore]
         public void Test_PlMtEngine_desroy_exception()
         {
@@ -40,7 +38,7 @@ namespace TestSwiPl
             q1.Dispose();
         }
 
-        [TestMethod]
+        [Test]
         public void Test_Muliptle_engines()
 		{
 

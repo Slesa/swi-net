@@ -1,20 +1,16 @@
 using SbsSW.SwiPlCs;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace TestSwiPl
 {
 
 
 	/// <summary>
-	/// TestFälle zu 'SWI-cs' dem SWI prolog interface in CSharp
+	/// TestFï¿½lle zu 'SWI-cs' dem SWI prolog interface in CSharp
 	/// </summary>
-	
-	[TestClass]
 	public class PLTermType : BasePlInit
 	{
 
-		[TestMethod]
+		[Test]
 		public void var()
 		{
             // PlTerm t = new PlTerm();
@@ -26,7 +22,7 @@ namespace TestSwiPl
 			Assert.IsFalse(t.IsCompound);
 		}
 
-		[TestMethod]
+		[Test]
 		public void var2()
 		{
 			PlTerm t = new PlTerm("A");
@@ -37,7 +33,7 @@ namespace TestSwiPl
 			Assert.IsFalse(t.IsCompound);
 		}
 
-        [TestMethod]
+        [Test]
         public void atom()
         {
             PlTerm t = new PlTerm("atomic");
@@ -50,7 +46,7 @@ namespace TestSwiPl
             Assert.IsFalse(t.IsCompound);
         }
 
-        [TestMethod]
+        [Test]
 		public void pl_string()
 		{
 			PlTerm t = PlTerm.PlString("string");
@@ -65,7 +61,7 @@ namespace TestSwiPl
 			Assert.IsFalse(t.IsCompound, "compound");
 		}
 
-        [TestMethod]
+        [Test]
         public void Compound()
         {
             PlTerm t = new PlTerm("a(i)");
@@ -77,14 +73,14 @@ namespace TestSwiPl
         }
 
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(SbsSW.SwiPlCs.Exceptions.PlException), "Syntax error: Illegal start of term\na(i,\n** here **\n)")]
         public void Compound_error_2()
         {
             PlTerm t = new PlTerm("a(i,)");
         }
 
-        [TestMethod]
+        [Test]
         public void Compound_term1()
         {
             PlTerm t = new PlTerm("a(i, b(A,L))");
@@ -94,7 +90,7 @@ namespace TestSwiPl
             Assert.IsFalse(t.IsVar, "var");
             Assert.IsFalse(t.IsNumber, "number");
         }
-        [TestMethod]
+        [Test]
         public void Compound_term2()
         {
             PlTerm t = new PlTerm("X=a(i, b(A,L));true");
@@ -104,7 +100,7 @@ namespace TestSwiPl
             Assert.IsFalse(t.IsVar, "var");
             Assert.IsFalse(t.IsNumber, "number");
         }
-        [TestMethod]
+        [Test]
         public void Compound_compound1()
         {
             PlTerm t = new PlTerm("a(i, b(A,L))");
@@ -115,7 +111,7 @@ namespace TestSwiPl
             Assert.IsFalse(t.IsNumber, "number");
         }
 
-        [TestMethod]
+        [Test]
 		public void is_float()
 		{
 			PlTerm t = new PlTerm(1.2);
@@ -128,7 +124,7 @@ namespace TestSwiPl
 			Assert.IsFalse(t.IsCompound, "compound");
 		}
 
-		[TestMethod]
+		[Test]
 		public void is_int()
 		{
 			PlTerm t = new PlTerm(12);
@@ -141,7 +137,7 @@ namespace TestSwiPl
 			Assert.IsFalse(t.IsCompound, "compound");
 		}
 
-		[TestMethod]
+		[Test]
 		public void is_list()
 		{
 			PlTerm t = new PlTerm("[1,2,3]");

@@ -22,24 +22,20 @@
 *********************************************************/
 
 using SbsSW.SwiPlCs;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace TestSwiPl
 {
 
 	/// <summary>
-	/// TestFälle zu 'SWI-cs' dem SWI prolog interface in CSharp
+	/// TestFï¿½lle zu 'SWI-cs' dem SWI prolog interface in CSharp
 	/// </summary>
-	
-	[TestClass]
 	public class TestPlQuery : BasePlInit
 	{
 
         private readonly string[] _abc = { "a", "b", "c" };
 
 		#region Query
-        [TestMethod]
+        [Test]
         public void query_exception()
         {
             try
@@ -55,7 +51,7 @@ namespace TestSwiPl
                 Console.WriteLine(ex.Message);
             }
         }
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(SbsSW.SwiPlCs.Exceptions.PlException), "sunexcpected end .NET BUG: message not verified")]
         public void query_exception2()
         {
@@ -66,7 +62,7 @@ namespace TestSwiPl
             }
         }
 
-        [TestMethod]
+        [Test]
         public void query_1()
         {
             using (var q = new PlQuery("member", new PlTermV(new PlTerm("A"), new PlTerm("[a,b]"))))
@@ -75,7 +71,7 @@ namespace TestSwiPl
                 Assert.AreEqual("a", q.Args[0].ToString());
             }
         }
-        [TestMethod]
+        [Test]
         public void query_2()
         {
             var q = new PlQuery("member", new PlTermV(new PlTerm("A"), new PlTerm("[a,b]")));
@@ -84,7 +80,7 @@ namespace TestSwiPl
                 Assert.AreEqual("a", q.Args[0].ToString());
             }
         }
-        [TestMethod]
+        [Test]
         public void query_3()
         {
             var q = new PlQuery("member", new PlTermV(new PlTerm("A"), new PlTerm("[a,b]")));
@@ -93,7 +89,7 @@ namespace TestSwiPl
         }
 
 
-        [TestMethod]
+        [Test]
 		public void queryNextSolutionLoop_arg_term_codelist()
 		{
 			var av = new PlTermV(2);
@@ -107,7 +103,7 @@ namespace TestSwiPl
 		}
 
 
-        [TestMethod]
+        [Test]
 		public void queryNextSolutionLoop_arg_term_listbuilded()
 		{
 			var av = new PlTermV(2);
@@ -129,7 +125,7 @@ namespace TestSwiPl
 			}
 		}
 
-        [TestMethod]
+        [Test]
 		public void queryNextSolutionLoop_arg_term_StringList()
 		{
 			var av = new PlTermV(2);
@@ -145,7 +141,7 @@ namespace TestSwiPl
 		}
 
 
-        [TestMethod]
+        [Test]
 		public void queryNextSolutionLoop_1()
 		{
             var tv = new PlTermV(new PlTerm("A"), new PlTerm("[a,b,c]"));
@@ -158,7 +154,7 @@ namespace TestSwiPl
 		}
 
 
-        [TestMethod]
+        [Test]
 		public void QueryNextSolutionLoop()
 		{
 			var q = new PlQuery("member", new PlTermV(new PlTerm("A"), new PlTerm("[a,b,c]")));
@@ -169,7 +165,7 @@ namespace TestSwiPl
 			}
 		}
 
-        [TestMethod]
+        [Test]
 		public void QueryForeach()
 		{
 			var q = new PlQuery("member", new PlTermV(new PlTerm("A"), new PlTerm("[a,b,c]")));
@@ -185,7 +181,7 @@ namespace TestSwiPl
 		#region query build by String
 
 
-        [TestMethod]
+        [Test]
         public void anonymous_variable_1()
         {
             PlQuery.PlCall("assert(a(a, 1))");
@@ -196,7 +192,7 @@ namespace TestSwiPl
             Assert.IsFalse(q.NextSolution());
         }
 
-        [TestMethod]
+        [Test]
         public void anonymous_variable_2()
         {
             PlQuery.PlCall("assert(a(a, 1))");
@@ -209,7 +205,7 @@ namespace TestSwiPl
             Assert.IsFalse(q.NextSolution());
         }
 
-        [TestMethod]
+        [Test]
         public void anonymous_variable_3()
         {
             PlQuery.PlCall("assert(a(a, 1, x))");
@@ -228,7 +224,7 @@ namespace TestSwiPl
 
 
 
-        [TestMethod]
+        [Test]
         public void QueryString()
         {
             var q = new PlQuery("member(A, [a,b])");
@@ -239,7 +235,7 @@ namespace TestSwiPl
             Assert.IsFalse(q.NextSolution());
         }
 
-        [TestMethod]
+        [Test]
         public void QueryStringOp()
         {
             PlQuery.PlCall("op(700, xfy, ~)");
@@ -249,7 +245,7 @@ namespace TestSwiPl
         }
 
 
-        [TestMethod]
+        [Test]
         #region queryString2_doc
         public void QueryString2()
         {
@@ -263,7 +259,7 @@ namespace TestSwiPl
         }
         #endregion queryString2_doc
 
-        [TestMethod]
+        [Test]
         #region queryStringNamed_doc
         public void QueryStringNamed()
         {
@@ -277,7 +273,7 @@ namespace TestSwiPl
         }
         #endregion queryStringNamed_doc
 
-        [TestMethod]
+        [Test]
         #region queryStringForeach_doc
         public void QueryStringForeach()
 		{
@@ -302,13 +298,13 @@ namespace TestSwiPl
 
         #region PlCall
 
-        [TestMethod]
+        [Test]
         public void PlCallNoVariableTrue()
         {
             bool result = PlQuery.PlCall("is_list([a,b,c])");
             Assert.IsTrue(result);
         }
-        [TestMethod]
+        [Test]
         public void PlCallNoVariableFail()
         {
             bool result = PlQuery.PlCall("is_list(123)");
@@ -319,14 +315,14 @@ namespace TestSwiPl
 
 
         #region PlCallQuery
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void PlCallQueryNoVariableException()
         {
             PlQuery.PlCallQuery("member(a, [a,b,c])");
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void PlCallQueryTooMannyVariableException()
         {
@@ -334,7 +330,7 @@ namespace TestSwiPl
         }
 
 
-        [TestMethod]
+        [Test]
         public void PlCallQuery0()
         {
             var t = PlQuery.PlCallQuery("member(A, [a,b,X])");
@@ -342,7 +338,7 @@ namespace TestSwiPl
             Assert.AreEqual("a", t.ToString());
         }
         
-        [TestMethod]
+        [Test]
         public void PlCallQuery1()
         {
             #region PlCallQuery_direct_1_doc
@@ -355,7 +351,7 @@ namespace TestSwiPl
                 Assert.AreEqual(_abc[i++], s.ToString());
             }
         }
-        [TestMethod]
+        [Test]
         public void PlCallQuery2()
         {
             #region PlCallQuery_direct_2_doc
@@ -363,7 +359,7 @@ namespace TestSwiPl
             Assert.AreEqual("ab", t.ToString());
             #endregion PlCallQuery_direct_2_doc
         }
-        [TestMethod]
+        [Test]
         public void PlCallQuery3()
         {
             #region PlCallQuery_direct_3_doc
@@ -382,7 +378,7 @@ namespace TestSwiPl
             Assert.IsTrue(PlQuery.PlCall("assert( (test(comp(X,Y)) :- member(Z,[1,2,3]), atomic_list_concat([X,Z],Y) ) )"));
         }
 
-        [TestMethod]
+        [Test]
         #region PlCallQueryCompound_string_doc
         public void PlCallQueryCompound_string()
         {
@@ -397,7 +393,7 @@ namespace TestSwiPl
         }
         #endregion PlCallQueryCompound_string_doc
 
-        [TestMethod]
+        [Test]
         #region PlCallQueryCompoundNamed_string_doc
         public void PlCallQueryCompoundNamed_string()
         {
@@ -412,7 +408,7 @@ namespace TestSwiPl
         }
         #endregion PlCallQueryCompoundNamed_string_doc
 
-        [TestMethod]
+        [Test]
         #region PlCallQueryCompound_termv_doc
         public void PlCallQueryCompound_termv()
         {
@@ -438,7 +434,7 @@ namespace TestSwiPl
 
         #region PL_query
 
-        [TestMethod]
+        [Test]
         #region get_prolog_version_number_doc
         public void Pl_query_version()
         {
@@ -450,7 +446,7 @@ namespace TestSwiPl
         #endregion PL_query
 
 
-        [TestMethod]
+        [Test]
         public void PlQuery_2() // von robert
         {
             #region explicit_query_dispose_doc
@@ -468,7 +464,7 @@ namespace TestSwiPl
         }
 
 
-        [TestMethod]
+        [Test]
         public void T1()
         {
             //<COMPOUND> sqrt(8,Var1)

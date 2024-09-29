@@ -21,12 +21,8 @@
 *
 *********************************************************/
 
-using System;
-using System.Linq;
 using SbsSW.SwiPlCs;
 using SbsSW.SwiPlCs.Callback;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;		// für List_ToList sample
 
 namespace TestSwiPl
 {
@@ -34,15 +30,13 @@ namespace TestSwiPl
 	/// <summary>
 	/// These Testcases are samples how to use C# methods as a callback predicate from prolog
 	/// </summary>
-
-    [TestClass]
     public class TestCallbackForeigenPredicate : BasePlInit
 	{
 
 
 		#region Deterministic
 
-        [TestMethod]
+        [Test]
         #region t_in_out_doc
         public void t_in_out()
         {
@@ -64,7 +58,7 @@ namespace TestSwiPl
 
 
         #region t_creating_a_list_doc
-        [TestMethod]
+        [Test]
         public void t_creating_a_list()
         {
             Delegate d = new DelegateParameter1(create_list);
@@ -82,7 +76,7 @@ namespace TestSwiPl
         #endregion t_creating_a_list_doc
 
 
-        [TestMethod]
+        [Test]
         public void t_compound_term()
         {
             Delegate d = new DelegateParameter3(compound_term);
@@ -115,7 +109,7 @@ namespace TestSwiPl
             return true;
         }
 
-        [TestMethod]
+        [Test]
         public void t_compound_term_arg()
         {
             Delegate d = new DelegateParameter3(compound_term_arg);
@@ -133,7 +127,7 @@ namespace TestSwiPl
         }
 
 
-        [TestMethod]
+        [Test]
         public void t_succeed_and_fail()
         {
             Delegate d = new DelegateParameter1(odd);
@@ -155,7 +149,7 @@ namespace TestSwiPl
 
 
 
-        [TestMethod]
+        [Test]
         public void t_modifying_a_list()
         {
             Delegate d = new DelegateParameter2(modify_list);
@@ -183,7 +177,7 @@ namespace TestSwiPl
 
 
 
-        [TestMethod]
+        [Test]
         public void t_callback_with_subQuery()
         {
             Delegate d = new DelegateParameter1(assert_fact);
@@ -215,7 +209,7 @@ namespace TestSwiPl
 
         #region Nondeterministic
         //[Ignore]
-        //[TestMethod]
+        //[Test]
         public void t_backtrack()
         {
             Delegate d = new DelegateParameterBacktrack(my_member);
@@ -252,7 +246,7 @@ namespace TestSwiPl
 
         #region VarArgs
 
-        [TestMethod]
+        [Test]
         public void t_varargs_single()
         {
 // ReSharper disable once CSharpWarnings::CS0618
@@ -267,7 +261,7 @@ namespace TestSwiPl
 
 
 
-        [TestMethod]
+        [Test]
         #region t_varargs_doc
         public void t_varargs()
         {

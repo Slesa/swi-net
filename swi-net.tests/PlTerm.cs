@@ -24,18 +24,14 @@
 using System.Globalization;
 using SbsSW.SwiPlCs.Exceptions;
 using SbsSW.SwiPlCs;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace TestSwiPl
 {
-	
-    [TestClass]
     public class TestPlTerm : BasePlInit
     {
         
         #region Unify
-        [TestMethod]
+        [Test]
 		public void Unify()
 		{
 			var t1 = new PlTerm("x");
@@ -47,7 +43,7 @@ namespace TestSwiPl
 			Assert.IsFalse(t3.Unify(t1));
 		}
 
-        [TestMethod]
+        [Test]
 		public void UnifyTerm()
 		{
             var t1 = new PlTerm("x(a)");
@@ -59,7 +55,7 @@ namespace TestSwiPl
 			Assert.IsFalse(t3.Unify(t1));
 		}
 
-        [TestMethod]
+        [Test]
 		public void UnifyTermVar()
 		{
             var t1 = new PlTerm("x(A)");
@@ -71,7 +67,7 @@ namespace TestSwiPl
 			Assert.IsFalse(t3.Unify(t1));
 		}
 
-        [TestMethod]
+        [Test]
         public void EqualSign()
         {
             var t1 = new PlTerm("x(A)");
@@ -83,7 +79,7 @@ namespace TestSwiPl
 
 
 
-        [TestMethod]
+        [Test]
 		public void UnifyTermVar1()
 		{
             var t1 = new PlTerm("x(A)");
@@ -92,7 +88,7 @@ namespace TestSwiPl
 			Assert.AreEqual("x(1)", t1.ToString());
 		}
 
-        [TestMethod]
+        [Test]
         #region UnifyTermVar_doc
         public void UnifyTermVar_doc()
 		{
@@ -104,14 +100,14 @@ namespace TestSwiPl
         }
         #endregion UnifyTermVar_doc
 
-        [TestMethod]
+        [Test]
 		public void UnifyInt()
 		{
             var t1 = new PlTerm("123");
             var t2 = new PlTerm("123");
 			Assert.IsTrue(t1.Unify(t2));
 		}
-        [TestMethod]
+        [Test]
 		public void UnifyIntVar()
 		{
             var t1 = new PlTerm("123");
@@ -120,7 +116,7 @@ namespace TestSwiPl
 			Assert.AreEqual("123", t2.ToString());
 		}
 
-        [TestMethod]
+        [Test]
 		public void UnifyListTuple()
 		{
             var list = new PlTerm("[1, (a, b), 2, (c, d)]");
@@ -151,7 +147,7 @@ namespace TestSwiPl
 
         #region cast operators
 
-        [TestMethod]
+        [Test]
         public void cast_double()
         {
             var t = new PlTerm(1.2);
@@ -159,7 +155,7 @@ namespace TestSwiPl
             Assert.AreEqual(1.2, d);
         }
 
-        [TestMethod]
+        [Test]
         public void cast_double_from_string()
         {
             var t = new PlTerm("1.2");
@@ -167,7 +163,7 @@ namespace TestSwiPl
             Assert.AreEqual(1.2, d);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(PlException))]
         public void cast_double_exception()
         {
@@ -178,7 +174,7 @@ namespace TestSwiPl
 
         #endregion cast operators
 
-        [TestMethod]
+        [Test]
         public void equals_long()
         {
             var t = new PlTerm(12);
@@ -186,7 +182,7 @@ namespace TestSwiPl
             Assert.IsTrue(t == 12);
         }
 
-        [TestMethod]
+        [Test]
         public void equals_string()
         {
             var t = new PlTerm("12");
@@ -199,21 +195,21 @@ namespace TestSwiPl
         #region special methods
 
 
-        [TestMethod]
+        [Test]
         public void plterm_PlString_len()
         {
             var t = PlTerm.PlString("abc", 9);
             Assert.AreEqual("abc", t.ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void plterm_PlString_len_2()
         {
             var t = PlTerm.PlString("abcde", 2);
             Assert.AreEqual("ab", t.ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void plterm_PlCharList()
         {
             var t = PlTerm.PlCharList("abc");
@@ -223,7 +219,7 @@ namespace TestSwiPl
 
         // lists
 
-        [TestMethod]
+        [Test]
         public void list_GetEnumerator()
         {
             const string mm = "abc";
@@ -234,7 +230,7 @@ namespace TestSwiPl
                 Assert.AreEqual(mm[i++].ToString(CultureInfo.InvariantCulture), x.ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void list_GetEnumerator_2()
         {
             const string mm = "abc";
@@ -245,7 +241,7 @@ namespace TestSwiPl
                 Assert.AreEqual(mm[i++].ToString(CultureInfo.InvariantCulture), e.Current.ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void plterm_IsInitialized()
         {
             var t = PlTerm.PlVar();
@@ -258,7 +254,7 @@ namespace TestSwiPl
 
 
         #region Equals and GetHashCode
-        [TestMethod]
+        [Test]
         public void plterm_Equals_term()
         {
             var t = new PlTerm(12);
@@ -266,7 +262,7 @@ namespace TestSwiPl
             Assert.IsTrue(t.Equals(t2));
         }
 
-        [TestMethod]
+        [Test]
         public void plterm_Equals_int()
         {
             var t = new PlTerm(12);
@@ -274,7 +270,7 @@ namespace TestSwiPl
             Assert.IsTrue(t.Equals(t2));
         }
 
-        [TestMethod]
+        [Test]
         public void plterm_Equals_int_false()
         {
             var t = new PlTerm(12);
@@ -282,7 +278,7 @@ namespace TestSwiPl
             Assert.IsFalse(t.Equals(t2));
         }
 
-        [TestMethod]
+        [Test]
         public void plterm_GetHashCode()
         {
             var t = PlTerm.PlVar();
@@ -295,14 +291,14 @@ namespace TestSwiPl
 
         #region ToString()
 
-        [TestMethod]
+        [Test]
 		public void ToString_var()
 		{
             var t = PlTerm.PlVar();
 			Assert.IsTrue(t.ToString().StartsWith("_L"), "Start not with _L - " + t);
 		}
 
-        [TestMethod]
+        [Test]
 		public void ToString_var2()
 		{
             var t = new PlTerm("A");
@@ -310,7 +306,7 @@ namespace TestSwiPl
             Assert.AreEqual("_L", t.ToString().Substring(0, 2));
 		}
 
-        [TestMethod]
+        [Test]
 		public void ToString_atom()
 		{
             var t = new PlTerm("atomic");
@@ -318,7 +314,7 @@ namespace TestSwiPl
 			Assert.AreEqual("atomic", t.ToString());
 		}
 
-        [TestMethod]
+        [Test]
 		public void ToString_pl_string()
 		{
             var t = PlTerm.PlString("string");
@@ -326,7 +322,7 @@ namespace TestSwiPl
             Assert.AreEqual("string", t.ToString());
 		}
 
-        [TestMethod]
+        [Test]
         public void ToString_Compound()
         {
             var t = new PlTerm("a(i)");
@@ -334,7 +330,7 @@ namespace TestSwiPl
             Assert.AreEqual("a(i)", t.ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_is_float()
         {
             var t = new PlTerm(1.2);
@@ -342,7 +338,7 @@ namespace TestSwiPl
             Assert.AreEqual("1.2", t.ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_is_int()
         {
             var t = new PlTerm(12);
@@ -350,7 +346,7 @@ namespace TestSwiPl
             Assert.AreEqual("12", t.ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_is_list()
         {
             var t = new PlTerm("[1,2,3]");
@@ -358,21 +354,21 @@ namespace TestSwiPl
             Assert.AreEqual("[1,2,3]", t.ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_is_ground()
         {
             var t = new PlTerm("a(i)");
             Assert.IsTrue(t.IsGround);
         }
 
-        [TestMethod]
+        [Test]
         public void ToString_is_not_ground()
         {
             var t = new PlTerm("a(I)");
             Assert.IsFalse(t.IsGround);
         }
 
-	    [TestMethod]
+	    [Test]
         public void ToString_Compound_string()
         {
             // bugfix reported by batu.akan@mdh.se mail from 13.07.2009
@@ -382,7 +378,7 @@ namespace TestSwiPl
             Assert.AreEqual("cs_speak('hello world')", s);
         }
 
-        [TestMethod]
+        [Test]
         public void ToStringCanonical_space()
         {
             var term = new PlTerm("'a b'");
@@ -390,7 +386,7 @@ namespace TestSwiPl
             Assert.AreEqual("'a b'", s);
         }
 
-        [TestMethod]
+        [Test]
         public void ToStringCanonical_UpperCaseAtom()
         {
             var term = new PlTerm("'Atom'");
@@ -402,28 +398,28 @@ namespace TestSwiPl
 
 		#region Arity
 
-        [TestMethod]
+        [Test]
 		public void Arity_list()
 		{
 			var t = new PlTerm("[1,2,3]");
 			Assert.AreEqual(2, t.Arity);
 		}
 
-        [TestMethod]
+        [Test]
 		public void Arity_Tuple()
 		{
 			var t = new PlTerm("(a,b)");
 			Assert.AreEqual(2, t.Arity);
 		}
 
-        [TestMethod]
+        [Test]
 		public void Arity_Triple()
 		{
 			var t = new PlTerm("(a,b,c)");
 			Assert.AreEqual(2, t.Arity);
 		}
 
-        [TestMethod]
+        [Test]
 		public void Arity_named_Triple()
 		{
 			var t = new PlTerm("x(a,b,c)");
@@ -434,7 +430,7 @@ namespace TestSwiPl
 
         #region PlTerm.Compound
 
-        [TestMethod]
+        [Test]
         public void PlTerm_PlCompound_termV()
         {
             var tv = new PlTermV(new PlTerm("a"), new PlTerm("b"), new PlTerm("c"));
@@ -442,21 +438,21 @@ namespace TestSwiPl
             Assert.AreEqual("foo(a,b,c)", t.ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void PlTerm_PlCompound_1()
         {
             var t = PlTerm.PlCompound("foo", new PlTerm("a"));
             Assert.AreEqual("foo(a)", t.ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void PlTerm_PlCompound_2()
         {
             var t = PlTerm.PlCompound("foo", new PlTerm("a"), new PlTerm("b"));
             Assert.AreEqual("foo(a,b)", t.ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void PlTerm_PlCompound_3()
         {
             var t = PlTerm.PlCompound("foo", new PlTerm("a"), new PlTerm("b"), new PlTerm("c"));
@@ -464,7 +460,7 @@ namespace TestSwiPl
         }
 
 
-        [TestMethod]
+        [Test]
         // NOTE: Microsoft_BUG: Exception message text is not compared
         [ExpectedException(typeof(NotSupportedException), "Work only for compound terms!")]
         public void PlTermIndexer_exception_atom()
@@ -472,7 +468,7 @@ namespace TestSwiPl
             var t = new PlTerm("foo");
             Assert.AreEqual("foo", t[0].ToString());
         }
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(NotSupportedException))]
         public void PlTermIndexer_exception_var()
         {
@@ -480,14 +476,14 @@ namespace TestSwiPl
             Assert.AreEqual("X", t[0].ToString());
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void PlTermIndexer_exception_range()
         {
             var t = new PlTerm("foo(bar)");
             Assert.AreEqual("foo(bar)", t[-1].ToString());
         }
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void PlTermIndexer_exception_range_2()
         {
@@ -496,7 +492,7 @@ namespace TestSwiPl
         }
 
 
-        [TestMethod]
+        [Test]
         public void PlTermIndexer1()
         {
             var t = new PlTerm("foo(bar)");
@@ -505,7 +501,7 @@ namespace TestSwiPl
         }
         
         #region PlTerm_indexer_doc
-        [TestMethod]
+        [Test]
         public void PlTermIndexer2()
         {
             var t = new PlTerm("foo(bar, x(y))");
@@ -514,7 +510,7 @@ namespace TestSwiPl
             Assert.AreEqual("x(y)", t[2].ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void PlTermIndexer_list1()
         {
             var t = new PlTerm("[a,b,c]");

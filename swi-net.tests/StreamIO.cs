@@ -21,21 +21,16 @@
 *
 *********************************************************/
 
-using System;
 using SbsSW.SwiPlCs;
 // using SbsSW.SwiPlCs.Exceptions;
 using SbsSW.SwiPlCs.Streams;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 
 namespace TestSwiPl
 {
 
 	/// <summary>
-	/// TestFälle zu 'SWI-cs' dem SWI-Prolog interface in CSharp
+	/// TestFï¿½lle zu 'SWI-cs' dem SWI-Prolog interface in CSharp
 	/// </summary>
-
-    [TestClass]
     public class TestStreamIo : BasePlInit
     {
 
@@ -49,11 +44,11 @@ namespace TestSwiPl
             return buffersize;
         }
 
-        [TestMethod]
+        [Test]
         public void StreamWrite()
         {
             // NOTE: the Swrite function is only called if you flush the output or send a newline character
-            const string validationString = "Hello .net world äöüß"; // The last 4 characters are German umlauts.
+            const string validationString = "Hello .net world ï¿½ï¿½ï¿½ï¿½"; // The last 4 characters are German umlauts.
             PlQuery.PlCall("assert( (test_write :- writeln('" + validationString + "'), flush_output) )");
             var wf = new DelegateStreamWriteFunction(Swrite);
             PlEngine.SetStreamFunctionWrite(PlStreamType.Output, wf);
@@ -66,7 +61,7 @@ namespace TestSwiPl
 
         #region StreamRead_doc
 
-	    private const string ValidationStringRead = "hello_dotnet_world_äöüß."; // The last 4 character are German umlauts.
+	    private const string ValidationStringRead = "hello_dotnet_world_ï¿½ï¿½ï¿½ï¿½."; // The last 4 character are German umlauts.
 
 	    static internal long Sread(IntPtr handle, IntPtr buffer, long buffersize)
         {
@@ -77,7 +72,7 @@ namespace TestSwiPl
         }
 
 
-        [TestMethod]
+        [Test]
         public void StreamRead()
         {
             var rf = new DelegateStreamReadFunction(Sread);

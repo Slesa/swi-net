@@ -21,20 +21,14 @@
 *
 *********************************************************/
 
-using System;
-using System.Linq;
 using SbsSW.SwiPlCs;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;		// für List_ToList sample
 
 namespace TestSwiPl
 {
 
 	/// <summary>
-	/// TestFälle zu 'SWI-cs' dem SWI prolog interface in CSharp
+	/// TestFï¿½lle zu 'SWI-cs' dem SWI prolog interface in CSharp
 	/// </summary>
-
-    [TestClass]
     public class PlTail : BasePlInit
 	{
 
@@ -43,7 +37,7 @@ namespace TestSwiPl
 		#region Test where somethigng is wrog with
 
 
-        [TestMethod]
+        [Test]
 		public void ListAppendAout()
 		{
 			var t1 = new PlTerm("[x,y,z]");
@@ -60,7 +54,7 @@ namespace TestSwiPl
 			Console.WriteLine(l2.ToString());
 		}
 
-        //[TestMethod]
+        //[Test]
 		//[Ignore]
 		//public void ListCloseString()
 		//{
@@ -70,7 +64,7 @@ namespace TestSwiPl
 		//}
 
 
-        //[TestMethod]
+        //[Test]
 		//[Ignore]
 		//public void ListAppendBase()
 		//{
@@ -81,7 +75,7 @@ namespace TestSwiPl
 		//}
 
 
-        //[TestMethod]
+        //[Test]
 		//[Ignore]
 		//public void ListAppend()
 		//{
@@ -95,7 +89,7 @@ namespace TestSwiPl
 
 		#region constructor
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(SbsSW.DesignByContract.PreconditionException))]
 		public void Create_list_from_atom()
         {
@@ -103,7 +97,7 @@ namespace TestSwiPl
             PlTerm.PlTail(t1);  // should throw PlTypeException
         }
 
-	    [TestMethod]
+	    [Test]
 		public void Create_List()
 		{
 			var t1 = new PlTerm("[a,b,c,d]");
@@ -112,7 +106,7 @@ namespace TestSwiPl
 			// test is_list
 			Assert.IsFalse(PlQuery.PlCall("is_list", new PlTermV(new PlTerm("AA"))));
 		}
-        [TestMethod]
+        [Test]
 		public void Create_ListFromPlTerm()
 		{
 			var t1 = new PlTerm("[a,b,c,d]");
@@ -120,14 +114,14 @@ namespace TestSwiPl
 			Assert.IsTrue(PlQuery.PlCall("is_list", new PlTermV(l1)));
 		}
 
-        [TestMethod]
+        [Test]
         public void Create_ListFromString()
         {
             var l1 = new PlTerm("[a,b,c,d]");
             Assert.IsTrue(PlQuery.PlCall("is_list", new PlTermV(l1)));
         }
 
-        [TestMethod]
+        [Test]
         public void Create_ListFromString2()
         {
             Assert.IsTrue(PlQuery.PlCall("is_list", new PlTermV(new PlTerm("[a,b,c,d]"))));
@@ -138,7 +132,7 @@ namespace TestSwiPl
 
 
 		#region constructing Lists
-        [TestMethod]
+        [Test]
         // doc c++ interface - 4.11 The class PlTail
         #region List_Append_from_doc
         public void List_Append()
@@ -158,7 +152,7 @@ namespace TestSwiPl
         #endregion List_Append_from_doc
 
 
-        [TestMethod]
+        [Test]
 		public void List_Append_compare_term()
 		{
 			// doc c++ interface - 4.11 The class PlTail
@@ -176,7 +170,7 @@ namespace TestSwiPl
 		}
 
 
-        [TestMethod]
+        [Test]
 		public void List_Add_term()
 		{
 			var t = new PlTerm("c");
@@ -190,7 +184,7 @@ namespace TestSwiPl
 			Assert.AreEqual("[a,b,c]", l.ToString(), "string comp");
 		}
 
-        [TestMethod]
+        [Test]
 		public void List_Add_term_2()
 		{
 			var t = new PlTerm("[x,y]");
@@ -204,7 +198,7 @@ namespace TestSwiPl
 			Assert.AreEqual("[a,b,[x,y]]", l.ToString(), "string comp");
 		}
 
-        [TestMethod]
+        [Test]
         public void List_Add_list()
         {
             var t = new PlTerm("[x,y]");
@@ -221,7 +215,7 @@ namespace TestSwiPl
             Assert.AreEqual("[a,b,x,y]", l.ToString(), "string comp");
         }
 
-        [TestMethod]
+        [Test]
         #region List_Add_list_doc
         public void List_Add_list_doc()
         {
@@ -238,7 +232,7 @@ namespace TestSwiPl
         }
         #endregion List_Add_list_doc
 
-        [TestMethod]
+        [Test]
         public void List_construction_var()
         {
             // PlTail l = new PlTail("X");
@@ -246,14 +240,14 @@ namespace TestSwiPl
             Assert.AreEqual(0, list_length(l), "list_length l");
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(SbsSW.DesignByContract.PreconditionException), "list")]
         public void List_construction_atom_fail()
         {
             PlTerm.PlTail(new PlTerm("a"));
         }
 
-	    [TestMethod]
+	    [Test]
         [ExpectedException(typeof(SbsSW.DesignByContract.PreconditionException), "list")]
         public void List_construction_int_fail()
         {
@@ -265,7 +259,7 @@ namespace TestSwiPl
 
 		#region new stuff foreach Enumerable   //list and indexer
 
-        [TestMethod]
+        [Test]
 		public void List_foreach()
 		{
             var l2 = new PlTerm("[x,y,z]");
@@ -282,7 +276,7 @@ namespace TestSwiPl
 			}
 		}
 
-        [TestMethod]
+        [Test]
 		public void List_query_foreach()
 		{
 			string[] sol = {"[a,b,c]", "[x,y,z]"};
@@ -318,7 +312,7 @@ namespace TestSwiPl
 
 
 
-        [TestMethod]
+        [Test]
 		public void List_ToList_sample()
 		{
             var l2 = new PlTerm("[x,y,z]");
@@ -338,13 +332,13 @@ namespace TestSwiPl
 
 		#endregion
 
-        [TestMethod]
+        [Test]
         public void list_sample()
         {
             
         }
 
-        [TestMethod]
+        [Test]
         public void list_sample2()
         {
             PlTerm list = PlQuery.PlCallQuery("sort([2,3,1,5,6], ListSorted)");
@@ -354,7 +348,7 @@ namespace TestSwiPl
             }
         }
 
-        [TestMethod]
+        [Test]
         public void list_sample3()
         {
             var q = new PlQuery("sort(L, ListSorted)");

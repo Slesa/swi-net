@@ -22,9 +22,6 @@
 *********************************************************/
 
 using SbsSW.SwiPlCs;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
-
 namespace TestSwiPl
 {
 
@@ -32,14 +29,9 @@ namespace TestSwiPl
 	/// These Testcases are more samples how to use Linq to 
     /// get the values of a Plrolog list ( PlTail )
 	/// </summary>
-
-
-
-
-    [TestClass]
     public class TestLinqPlTail : BasePlInit
 	{
-        [TestMethod]
+        [Test]
         public void xxxxxx()
         {
             string[] mm = { "aa", "bb", "cc" };
@@ -64,7 +56,7 @@ namespace TestSwiPl
 
 
 	    #region query_prologlist_PlTail_with_Linq_doc
-        [TestMethod]
+        [Test]
         public void LinQ_2_Object_from_a_list()
         {
             var list = new PlTerm("[w,x,y,z]");
@@ -79,7 +71,7 @@ namespace TestSwiPl
                 Assert.AreEqual(mm[i++], t.ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void LinQ_2_Object_from_a_list_numbers()
         {
             var list = new PlTerm("[4,5,a,f,6,7,8]");
@@ -94,7 +86,7 @@ namespace TestSwiPl
                 Assert.AreEqual(mm[i++], t.ToString());
         }
 
-        [TestMethod]
+        [Test]
         public void LinQ_2_Object_from_a_list_numbers_as_int()
         {
             var list = new PlTerm("[4,5,a,f,6,7,8]");
