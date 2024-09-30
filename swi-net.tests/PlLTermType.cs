@@ -1,4 +1,5 @@
 using SbsSW.SwiPlCs;
+using SbsSW.SwiPlCs.Exceptions;
 
 namespace TestSwiPl
 {
@@ -74,10 +75,12 @@ namespace TestSwiPl
 
 
         [Test]
-        [ExpectedException(typeof(SbsSW.SwiPlCs.Exceptions.PlException), "Syntax error: Illegal start of term\na(i,\n** here **\n)")]
         public void Compound_error_2()
         {
-            PlTerm t = new PlTerm("a(i,)");
+	        Assert.Throws<PlException>(() =>
+	        {
+		        PlTerm t = new PlTerm("a(i,)");
+	        }, "Syntax error: Illegal start of term\na(i,\n** here **\n)");
         }
 
         [Test]

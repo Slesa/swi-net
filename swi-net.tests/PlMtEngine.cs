@@ -8,11 +8,8 @@ namespace TestSwiPl
 	/// <summary>
 	/// TestF�lle zu 'SWI-cs' dem SWI prolog interface in CSharp
 	/// </summary>
-
-    [TestClass()]
     public class t_PlMtEngine : BasePlInit
 	{
-
         [Test]
         public void Test_PlMtEngine_desroy()
         {

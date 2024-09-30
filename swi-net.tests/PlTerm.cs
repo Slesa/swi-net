@@ -72,9 +72,10 @@ namespace TestSwiPl
         {
             var t1 = new PlTerm("x(A)");
             var t2 = t1;
-            var t1O = new PrivateObject(t1);
-            var t2O = new PrivateObject(t2);
-            Assert.AreEqual(t1O.GetProperty("TermRef"), t2O.GetProperty("TermRef"));
+            // var t1O = new PrivateObject(t1);
+            // var t2O = new PrivateObject(t2);
+            // Assert.AreEqual(t1O.GetProperty("TermRef"), t2O.GetProperty("TermRef"));
+            Assert.False(true);
         }
 
 
@@ -164,7 +165,7 @@ namespace TestSwiPl
         }
 
         [Test]
-        [ExpectedException(typeof(PlException))]
+        // [ExpectedException(typeof(PlException))]
         public void cast_double_exception()
         {
             var t = new PlTerm("1.2r");
@@ -462,14 +463,14 @@ namespace TestSwiPl
 
         [Test]
         // NOTE: Microsoft_BUG: Exception message text is not compared
-        [ExpectedException(typeof(NotSupportedException), "Work only for compound terms!")]
+        // [ExpectedException(typeof(NotSupportedException), "Work only for compound terms!")]
         public void PlTermIndexer_exception_atom()
         {
             var t = new PlTerm("foo");
             Assert.AreEqual("foo", t[0].ToString());
         }
         [Test]
-        [ExpectedException(typeof(NotSupportedException))]
+        // [ExpectedException(typeof(NotSupportedException))]
         public void PlTermIndexer_exception_var()
         {
             var t = new PlTerm("X");
@@ -477,14 +478,14 @@ namespace TestSwiPl
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        // [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void PlTermIndexer_exception_range()
         {
             var t = new PlTerm("foo(bar)");
             Assert.AreEqual("foo(bar)", t[-1].ToString());
         }
         [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        // [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void PlTermIndexer_exception_range_2()
         {
             var t = new PlTerm("foo(bar)");

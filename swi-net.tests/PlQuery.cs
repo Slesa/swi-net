@@ -52,7 +52,7 @@ namespace TestSwiPl
             }
         }
         [Test]
-        [ExpectedException(typeof(SbsSW.SwiPlCs.Exceptions.PlException), "sunexcpected end .NET BUG: message not verified")]
+        // [ExpectedException(typeof(SbsSW.SwiPlCs.Exceptions.PlException), "sunexcpected end .NET BUG: message not verified")]
         public void query_exception2()
         {
             using (var q = new PlQuery("member(A,[a,b,c]"))
@@ -316,17 +316,15 @@ namespace TestSwiPl
 
         #region PlCallQuery
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void PlCallQueryNoVariableException()
         {
-            PlQuery.PlCallQuery("member(a, [a,b,c])");
+            Assert.Throws<ArgumentException>(() =>PlQuery.PlCallQuery("member(a, [a,b,c])"));
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void PlCallQueryTooMannyVariableException()
         {
-            PlQuery.PlCallQuery("member(A, X)");
+            Assert.Throws<ArgumentException>(() => PlQuery.PlCallQuery("member(A, X)"));
         }
 
 

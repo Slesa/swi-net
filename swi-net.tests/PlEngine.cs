@@ -24,8 +24,6 @@ namespace TestSwiPl
 	/// TestFälle zu 'SWI-cs' dem SWI prolog interface in CSharp
     /// NOTE: all test methods must initialize PlEngine
 	/// </summary>
-
-    [TestClass()]
     public class T_PlEngine
 	{
 
@@ -126,7 +124,7 @@ namespace TestSwiPl
         }
 
         [Test]
-        [TestCategory("mt")]
+        [Category("mt")]
         public void MT_1()
         {
             System.Diagnostics.Trace.WriteLine("MT1:" + System.Threading.Thread.CurrentThread.ManagedThreadId);
@@ -136,7 +134,7 @@ namespace TestSwiPl
             PlEngine.PlCleanup();
         }
         [Test]
-        [TestCategory("mt")]
+        [Category("mt")]
         public void MT_2()
         {
             System.Diagnostics.Trace.WriteLine("MT2:" + System.Threading.Thread.CurrentThread.ManagedThreadId);
@@ -146,7 +144,7 @@ namespace TestSwiPl
             PlEngine.PlCleanup();
         }
         [Test]
-        [TestCategory("mt")]
+        [Category("mt")]
         public void MT_3()
         {
             System.Diagnostics.Trace.WriteLine("MT3:" + System.Threading.Thread.CurrentThread.ManagedThreadId);

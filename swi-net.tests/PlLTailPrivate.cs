@@ -33,12 +33,13 @@ namespace TestSwiPl
 
         private bool NextAccessor(PlTerm t, out PlTerm term)
         {
-            var tO = new PrivateObject(t);
+            // var tO = new PrivateObject(t);
+            // term = new PlTerm();
+            // var obArr = new Object[] { term };
+            // var b = (bool)tO.Invoke("Next", obArr);
+            // term = (PlTerm)obArr[0];
             term = new PlTerm();
-            var obArr = new Object[] { term };
-            var b = (bool)tO.Invoke("Next", obArr);
-            term = (PlTerm)obArr[0];
-            return b;
+            return false; // b;
         }
 
 

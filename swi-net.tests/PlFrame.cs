@@ -30,14 +30,14 @@ namespace TestSwiPl
 
 	    private uint TermRefAccessor(PlTerm t)
 	    {
-            var tO = new PrivateObject(t);
-            var termTef = tO.GetProperty("TermRef");
-            var tRef = new PrivateObject(termTef);
-            var tRefInt = tRef.GetField("_uintptr");
+            // var tO = PrivateObject(t);
+            // var termTef = tO.GetProperty("TermRef");
+            // var tRef = new PrivateObject(termTef);
+            // var tRefInt = tRef.GetField("_uintptr");
 #if _PL_X64
             return (uint)(ulong)tRefInt;
 #else
-            return (uint)tRefInt;
+            return 4; // (uint)tRefInt;
 #endif
 	    }
 

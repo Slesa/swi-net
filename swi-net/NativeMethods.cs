@@ -285,7 +285,7 @@ namespace SbsSW.SwiPlCs
 		/////////////////////////////
 		/// libpl
 		///
-        // das funktioniert NICHT wenn umlaute e.g. ü im pfad sind.
+        // das funktioniert NICHT wenn umlaute e.g. Ã¼ im pfad sind.
         // TODO wchar
         [DllImport(DllFileName, CharSet = CharSet.Ansi, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         internal static extern int PL_initialise(int argc, String[] argv);

@@ -144,30 +144,27 @@ namespace TestSwiPl
         #region prolog throw c# catch
 
         [Test]
-        [ExpectedException(typeof(PlException), "Unknown message: error")]
         public void t_prolog_exception()
         {
             Assert.IsTrue(PlQuery.PlCall("assert( (test_throw :- throw(error)) )"));
-            PlQuery.PlCall("test_throw");
+            Assert.Throws<PlException>(() => PlQuery.PlCall("test_throw"),"Unknown message: error" );
         }
 
         [Test]
-        [ExpectedException(typeof(PlTypeException), "is/2: Arithmetic: `error/0' is not a function")]
         public void t_prolog_exception_2()
         {
-            PlQuery.PlCall("sumlist([1,error],L)");
+            Assert.Throws<PlTypeException>(() =>PlQuery.PlCall("sumlist([1,error],L)"), "is/2: Arithmetic: `error/0' is not a function");
         }
 
         [Test]
-        [ExpectedException(typeof(PlDomainException), "open/3: Domain error: `io_mode' expected, found `nonsens'")]
         public void t_prolog_exception_3()
         {
-            PlQuery.PlCall("open(temp_kill, nonsens, F)");
+            Assert.Throws<PlDomainException>(() => PlQuery.PlCall("open(temp_kill, nonsens, F)"), "open/3: Domain error: `io_mode' expected, found `nonsens'");
         }
 
 
         [Test]
-        [ExpectedException(typeof(PlTypeException), "`list' expected, found `[a,b,c]'")]
+        // [ExpectedException(typeof(PlTypeException), "`list' expected, found `[a,b,c]'")]
         public void TestException_in_a_query_2()
         {
             var plq = new PlQuery("atomic_list_concat(L, A)");
