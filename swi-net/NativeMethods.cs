@@ -160,13 +160,13 @@ namespace SbsSW.SwiPlCs
 
 	internal static class NativeMethods
 	{
-#if _LINUX
-#warning _LINUX is defined (libdl.so must be available). Compiling for Linux
+// #if _LINUX
+// #warning _LINUX is defined (libdl.so must be available). Compiling for Linux
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
         //Linux Compatibility		
         public static int RTLD_NOW = 2; // for dlopen's flags
 
-        const string s_kernel_linux = "libdl.so";
+        const string s_kernel_linux = "libdl.so.2";
 
         [DllImport(s_kernel_linux, CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
         private static extern SafeLibraryHandle dlopen([In] string filename, [In] int flags);
@@ -180,8 +180,8 @@ namespace SbsSW.SwiPlCs
         [DllImport(s_kernel_linux, CharSet = CharSet.Ansi, BestFitMapping = false, SetLastError = true)]
         internal static extern IntPtr dlsym(SafeLibraryHandle hModule, String procname);
         
-#else
-#warning _LINUX is *not* defined (kernel32.dll must be available). Compiling for Windows
+// #else
+// #warning _LINUX is *not* defined (kernel32.dll must be available). Compiling for Windows
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 		//Windows
         const string WinKernel32 = "kernel32";
@@ -196,27 +196,20 @@ namespace SbsSW.SwiPlCs
         // see: http://blogs.msdn.com/jmstall/archive/2007/01/06/Typesafe-GetProcAddress.aspx
         [DllImport(WinKernel32, CharSet = CharSet.Ansi, BestFitMapping = false, SetLastError = true)]
         internal static extern IntPtr GetProcAddress(SafeLibraryHandle hModule, String procname);
-#endif		
+// #endif		
 		
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 		//Platform independant function calls
 		internal static SafeLibraryHandle LoadDll(string filename) {
-#if _LINUX
-            //if (Environment.OSVersion.Platform == PlatformID.Unix ||
-            //    Environment.OSVersion.Platform == PlatformID.MacOSX) {
-                return dlopen(filename, RTLD_NOW);
-            //}
-#else
-            return LoadLibrary(filename); 		
-#endif
-        }
+			if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+				return LoadLibrary(filename); 		
+            return dlopen(filename, RTLD_NOW);
+		}
 
 		public static bool UnLoadDll(IntPtr hModule) {
-#if _LINUX
+			if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+				return FreeLibrary(hModule);		
             return dlclose(hModule);
-#else
-            return FreeLibrary(hModule);		
-#endif
         }
 
 //        internal static IntPtr GetProcHandle(SafeLibraryHandle hModule, String procname)
@@ -231,11 +224,9 @@ namespace SbsSW.SwiPlCs
 
         internal static IntPtr GetPoninterOfIoFunctions(SafeLibraryHandle hModule)
         {
-#if _LINUX
+	        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+		        return GetProcAddress(hModule, "S__iob");
             return dlsym(hModule, "S__iob");
-#else
-            return GetProcAddress(hModule, "S__iob");
-#endif
         }
 		
 		
@@ -265,18 +256,17 @@ namespace SbsSW.SwiPlCs
 	[ System.Security.SuppressUnmanagedCodeSecurityAttribute ]
 	internal static class SafeNativeMethods
 	{
-        private const string DllFileName = "libswipl.dll";
+        const string DllFileName = "libswipl"; //".dll";
+        // const string SoFileName = "/usr/lib64/swipl-9.0.4/lib/x86_64-linux/libswipl.so.9.0.4";
+        const string SoFileName = "./libswipl.so";
 		
 		public static string DllFileName1
 		{
 			get 
 			{ 
-				if (Environment.OSVersion.Platform == PlatformID.Unix ||
-                	Environment.OSVersion.Platform == PlatformID.MacOSX) 
-				{
-                	return "libpl.so";
-            	}
-				return DllFileName; 
+				if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+					return DllFileName; 
+				return SoFileName; 
 			}
 		} 
 
@@ -369,13 +359,14 @@ namespace SbsSW.SwiPlCs
 		[DllImport(DllFileName)] // return term_t
         internal static extern uintptr_t PL_new_term_ref();
 		//__pl_export void	PL_put_integer(term_t term, long i);
-		[DllImport(DllFileName)]
+		[DllImport(DllFileName, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void PL_put_integer(uintptr_t term, int i);
 		[DllImport(DllFileName)]
         internal static extern void PL_put_float(uintptr_t term, double i);
 
         [DllImport(DllFileName, CharSet = CharSet.Unicode, BestFitMapping = false, ThrowOnUnmappableChar = true)]
-        internal static extern int PL_get_wchars(uintptr_t term, [In, Out]ref int len, [In, Out]ref IntPtr s, uint flags);
+        // [DllImport(DllFileName, CharSet = CharSet.Unicode)]
+        internal static extern int PL_get_wchars(uintptr_t term, [In, Out]ref int len, [In, Out][MarshalAs(UnmanagedType.LPWStr)]ref IntPtr s, uint flags);
 
 
 
@@ -410,7 +401,8 @@ namespace SbsSW.SwiPlCs
 		//__pl_export functor_t	PL_new_functor(atom_t f, int atom);
 
         [DllImport(DllFileName, CharSet = CharSet.Unicode, BestFitMapping = false, ThrowOnUnmappableChar = true)]
-        internal static extern int PL_wchars_to_term([In]string chars, uintptr_t term);
+        // [DllImport(DllFileName, CharSet = CharSet.Auto, BestFitMapping = false)]
+        internal static extern int PL_wchars_to_term([MarshalAs(UnmanagedType.LPWStr)][In]string chars, uintptr_t term);
         [DllImport(DllFileName)]
         internal static extern void PL_cons_functor_v(uintptr_t term, uintptr_t functor_t, uintptr_t termA0);
 		[DllImport(DllFileName)]

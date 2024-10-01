@@ -26,8 +26,6 @@ namespace TestSwiPl
 	/// </summary>
     public class T_PlEngine
 	{
-
- 
         /// <summary>
         /// Sample from the documentation PlFrame
         /// </summary>

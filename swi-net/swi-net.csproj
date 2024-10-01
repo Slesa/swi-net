@@ -7,4 +7,18 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DefineConstants>TRACE;_PL_X64</DefineConstants>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DefineConstants>TRACE;_PL_X64</DefineConstants>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Update="libswipl.so">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

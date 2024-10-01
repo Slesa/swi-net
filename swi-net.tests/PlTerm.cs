@@ -344,6 +344,7 @@ namespace TestSwiPl
         {
             var t = new PlTerm(12);
             Assert.IsTrue(t.IsInteger);
+            Assert.IsTrue(t.IsNumber);
             Assert.AreEqual("12", t.ToString());
         }
 

@@ -35,7 +35,7 @@ namespace TestSwiPl
             // var tRef = new PrivateObject(termTef);
             // var tRefInt = tRef.GetField("_uintptr");
 #if _PL_X64
-            return (uint)(ulong)tRefInt;
+            return (uint)(ulong)8; //tRefInt;
 #else
             return 4; // (uint)tRefInt;
 #endif
